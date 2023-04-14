@@ -30,14 +30,24 @@ interface Props {
   navigation: DescriptionNavigationProp;
 }
 
+
+
 const WeatherSearch = ({navigation}: Props) => {
   const dispatch = useDispatch();
   const data = useSelector((state: any) => state.weather.weatherData);
 
-  const [filteredData, setFilteredData] = useState<any>([]);
-  const [masterData, setMasterData] = useState<any>([]);
+  const [filteredData, setFilteredData] = useState<WeatherState["weatherData"]>([]);
+  const [masterData, setMasterData] = useState<WeatherState["weatherData"]>([]);
   const [search, setSearch] = useState('');
-  const [refreshing, setRefreshing] = useState(false);
+  const [refreshing, setRefreshing] = useState<boolean>(false);
+
+  interface CityData {
+    city: string;
+    temperature: string;
+    lat: string;
+    lng: string;
+    language: string;
+  }
 
   useEffect(() => {
     setFilteredData(data);
@@ -47,7 +57,7 @@ const WeatherSearch = ({navigation}: Props) => {
     if (text) {
       const newData: any = [];
       newData.push(
-        masterData.filter((item: any) => {
+        masterData.filter((item: CityData) => {
           const itemData = item.city.toUpperCase()
             ? item.city.toUpperCase()
             : '';
