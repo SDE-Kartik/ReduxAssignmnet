@@ -12,11 +12,25 @@ import {
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getWeather } from '../ReduxStore/Actions';
+import { RootStackParamList } from "../Navigation/MainNavigation";
+import {StackNavigationProp} from '@react-navigation/stack';
 
-function HomeScreen({ navigation }:any): JSX.Element {
+type DescriptionNavigationProp = StackNavigationProp<
+  RootStackParamList,
+  'Home'
+>;
+
+interface Props {
+  navigation: DescriptionNavigationProp;
+}
+
+
+function HomeScreen({ navigation }:Props): JSX.Element {
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(getWeather());
+        console.log("Inside useEffect");
+        console.log(dispatch(getWeather()));
+        console.log("Inside useEffect");
       }, []);
   return (
     <View style={styles.container}>

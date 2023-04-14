@@ -53,7 +53,8 @@ const WeatherSearch = ({navigation}: Props) => {
     setFilteredData(data);
     setMasterData(data);
   }, []);
-  const searchFilter = (text: any) => {
+  
+  const searchFilter = (text: string) => {
     if (text) {
       const newData: any = [];
       newData.push(
